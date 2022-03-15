@@ -11,7 +11,7 @@ urlpatterns=[
     path('login/',LoginView.as_view(), name="login"),
     path('register/',views.registerView,name="register"),
     path('logout/',LogoutView.as_view(next_page ="index"), name="logout"),
-    path('upload/profile',views.update_profile,name ="upadate-profile"),
+    # path('upload/profile',views.update_profile,name ="upadate-profile"),
     path('comment/',views.comment, name ='comment')
 
 ]

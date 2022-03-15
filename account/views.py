@@ -17,15 +17,24 @@ def index(request):
     }
     return render(request,'index.html',context)
 
-# @login_required()
-# def profileView(request):
-#     profile=Profile.objects.all()
-#     image=Image.objects.all()
-#     context={
-#         "profile":profile,
-#         "image":image
-#     }
-#     return render(request, 'profile.html',context)
+@login_required()
+def profileView(request):
+    current_user = request.user
+
+    if request.method == 'POST':
+        form = UpdateProfileForm(request.POST,request.FILES, instance = current_user.profile)
+        if form.is_valid():
+            image =form.save(commit = False)
+            image.user = current_user
+            image.save()
+        return redirect ('index')
+
+    else:
+        form = UpdateProfileForm()
+    context={
+        "form":form
+    }
+    return render(request, 'profile.html',context)
 
 # @login_required()
 # def update_profile(request):

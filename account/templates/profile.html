@@ -1,102 +1,31 @@
-{% extends 'base.html'%}
-{%block content%}
-
+{% extends "base.html"%}
+{% load bootstrap4%}
+{% block content%}
 <head>
-    <style>
-
-/* Dropdown button */
-.dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones*/
-  margin: 0; /* Important for vertical align on mobile phones  */
-
-} 
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: rgb(187, 209, 202);
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-} 
-    </style>
+    
 </head>
 
 <body>
-    
-    <nav class="navbar" style="background-color: rgb(187, 209, 202);">       
-        <div class="container-fliud">
-            <div class="navbar-header" style="text-align: center;">
-                <div class="dropdown">
-                    <button class="dropbtn">Dropdown
-                      <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content">
-                      
-                        <a class="navbar-brand" href="{% url 'index' %}" style="color: black;">HOME</a>
-                        <a class="navbar-brand" href="{% url 'upadate-profile' %}" style="color: black;">Update-Profile</a>   
-                        <a class="navbar-brand" href="{% url 'logout' %}" style="color: black;">LOGOUT</a> 
-                    </div>
-                </div>
-                                 
-            </div>
+  <div class="container" style="font-family:'Times New Roman', Times, serif;">
+    <div class="row">
+      <form   method="post" style="font-family:'Times New Roman', Times, serif; ">
+        {%csrf_token%} 
+        {%bootstrap_form form%}
+        <br>
+        <div class="form-group">
+          <input type="submit" class="btn btn-danger btn-md" value="Post">
         </div>
-    </nav>
-    <br>
-    <br>
-    <div class="container">
-        <div class="row">
-            <!-- <div class="col-md-4">
+        
+      </form>
 
-            </div> -->
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="{{image.image.url}}" alt="{{image.profile_image.url}}" class= "img-fluid" width="200" height="200">
-                        <br>
-                        <br>
-                        <h4>username:{{ profile.user.username }}</h4>
-                        <h4>followers: {{ image.followers }}</h4>
-                        <h4>likes:{{ image.likes }}</h4> 
+      {% block scripts %}
 
-                    
-                        <div class="card-body">
-                        {%include 'comments.html'%}
-                        </div>
-                    </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      {% bootstrap_javascript %} {% endblock %}
 
-                </div>
-            
-            </div>
-          
-        </div>
+
+    </div>
+  </div>
 </body>
 
 {%endblock%}
