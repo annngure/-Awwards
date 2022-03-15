@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
+# from cloudinary.models import CloudinaryField
 
 
 # # Create your models here.
@@ -20,9 +20,9 @@ class Location(models.Model):
 
 class Project(models.Model):
     title= models.TextField(max_length=200, null=True )
-    project_image = CloudinaryField('image')
+    project_image =models.ImageField(upload_to='image', blank = True)
     description = models.TextField()
-    project_url = models.URLField(max_length=250)
+    project_url = models.URLField(max_length=250, blank=True)
   
 
     def save_project(self):
@@ -41,7 +41,7 @@ class Profile(models.Model):
     user= models.OneToOneField(User, null = True , related_name ='profile',on_delete = models.CASCADE)
     first_name = models.CharField(max_length=30, null=True)
     last_name = models.CharField(max_length =30, null=True)
-    profile_image = CloudinaryField('image', blank = True)
+    profile_image = models.ImageField(upload_to='image', blank = True)
     bio = models.TextField(blank = True)
     project =models.ForeignKey(Project, null = True,on_delete=models.CASCADE)
 
@@ -62,7 +62,7 @@ class Profile(models.Model):
 
 
 class Image(models.Model):
-    image = CloudinaryField('image')
+    image = models.ImageField(upload_to='image', blank = True)
     name=models.CharField(max_length=40)
     user = models.ForeignKey(User,on_delete = models.CASCADE)
     description=models.CharField(max_length=2000)
