@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from django.contrib import messages
+from django.contrib import auth,messages
 from .models import *
 
 # Create your views here.
@@ -17,39 +17,39 @@ def index(request):
     }
     return render(request,'index.html',context)
 
-@login_required()
-def profileView(request):
-    profile=Profile.objects.all()
-    image=Image.objects.all()
-    context={
-        "profile":profile,
-        "image":image
-    }
-    return render(request, 'profile.html',context)
+# @login_required()
+# def profileView(request):
+#     profile=Profile.objects.all()
+#     image=Image.objects.all()
+#     context={
+#         "profile":profile,
+#         "image":image
+#     }
+#     return render(request, 'profile.html',context)
 
-@login_required()
-def update_profile(request):
-    if request.method =="POST":
-        form = UpdateProfile(request.POST ,request.FILES)
-        if form.is_valid():
-            request_profile.save_profile()
-            messages.success(request,'Your profile is added sucessfully')
-            return redirect('profile')
-    else:
-        form =UpdateProfile()
-    if request.method =='POST':
-        form = UpdateProfile(request.POST,request.FILES)
-        if form.is_valid():
-            new_profile.save_profile()
-            messages.success(request,'Your profile is added sucessfully')
-            return redirect('profile')
-    else:
-        form = UpdateProfile()
-    context={
-        "form":form
-    }
+# @login_required()
+# def update_profile(request):
+#     if request.method =="POST":
+#         form = UpdateProfile(request.POST ,request.FILES)
+#         if form.is_valid():
+#             request_profile.save_profile()
+#             messages.success(request,'Your profile is added sucessfully')
+#             return redirect('profile')
+#     else:
+#         form =UpdateProfile()
+#     if request.method =='POST':
+#         form = UpdateProfile(request.POST,request.FILES)
+#         if form.is_valid():
+#             new_profile.save_profile()
+#             messages.success(request,'Your profile is added sucessfully')
+#             return redirect('profile')
+#     else:
+#         form = UpdateProfile()
+#     context={
+#         "form":form
+#     }
 
-    return render(request, 'update-profile.html',context)
+#     return render(request, 'update-profile.html',context)
 
 def comment(request):
     # post = get_object_or_404(image,id=id)	
@@ -87,22 +87,24 @@ def registerView(request):
     return render(request,'registration/register.html',context)
 
 def loginPage(request):
-    if request.method == "POST":
-        form = LoginForm(request, data=request.POST)
-        if form.is_valid():
-            username=form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request,user)
-                messages.info(request,"You are now logged in.")
-                return redirect('profile')
-            
-    else:
-        messages.error(request,"Invalid username or password.")
-    form = LoginForm()
-    context={
-        "form":form
-    }
-    return render(request,'registration/login.html',context)
+    if request.user.is_authenticated():
+        return redirect('index')
 
+    if request.method == "POST":
+        username=request.POST.get("username")
+        password = request.POST.get("password")
+        user = auth.authenticate(username=username, password=password)
+        
+        if user is not None:
+                auth.login(request,user)
+                messages.info(request,"You are now logged in.")
+                return redirect('index')
+            
+        else:
+            messages.error(request,"Invalid username or password.")
+
+    return render(request,'registration/login.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('login')
