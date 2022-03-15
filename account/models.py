@@ -5,40 +5,45 @@ from cloudinary.models import CloudinaryField
 
 # # Create your models here.
 
-class Image(models.Model):
-    user = models.ForeignKey(User,on_delete = models.CASCADE,null=True)
-    image = CloudinaryField('image')
-    name = models.CharField(max_length=60)
-    likes= models.IntegerField(default=0)
-    caption = models.TextField()
+class Location(models.Model):
+    name = models.CharField(max_length=50)
+    
+
+    def save_location(self):
+        self.save
+
+    def delete_location(self):
+        self.delete
+
+    def __int__(self):
+        return self.name
+
+class Project(models.Model):
+    title= models.TextField(max_length=200, null=True )
+    project_image = CloudinaryField('image')
+    description = models.TextField()
+    project_url = models.URLField(max_length=250)
   
 
-    def save_image(self):
+    def save_project(self):
         self.save()
-    
-    @classmethod
-    def display_image(cls):
-        images=cls.objects.all()
-        return images
 
-    @classmethod
-    def search_image(cls,search_term):
-        images = cls.object.filter(name_icontains = search_term).all()
-        return images
 
-    def delete_image(self):
+    def delete_project(self):
         self.delete()
+
 
     def __str__(self):
         return self.name
    
 
 class Profile(models.Model):
+    user= models.OneToOneField(User, null = True , related_name ='profile',on_delete = models.CASCADE)
     first_name = models.CharField(max_length=30, null=True)
     last_name = models.CharField(max_length =30, null=True)
-    profile_image = models.ImageField(upload_to='image')
+    profile_image = CloudinaryField('image', blank = True)
     bio = models.TextField(blank = True)
-    username = models.CharField(default='user',max_length=30)
+    project =models.ForeignKey(Project, null = True,on_delete=models.CASCADE)
 
     def save_profile(self):
         self.save()
@@ -53,30 +58,26 @@ class Profile(models.Model):
     def search_profile(cls,search_term):
         profile =cls.objects.filter(first_name_icontains =search_term)
 
-class Comment(models.Model):
-    comment = models.TextField(blank= True,null=True)
-    image = models.ForeignKey(Image,on_delete = models.CASCADE,null=True)
-    user = models.ForeignKey(User,on_delete = models.CASCADE)
 
-    def delete_comment(self):
+
+
+class Image(models.Model):
+    image = CloudinaryField('image')
+    name=models.CharField(max_length=40)
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    description=models.CharField(max_length=2000)
+    location=models.ForeignKey(Location,null=True,on_delete = models.CASCADE)
+    likes = models.IntegerField(default=0)
+    comment = models.TextField(blank= True)
+   
+
+    def delete_image(self):
         self.delete()
 
-    def save_comment(self):
+    def save_image(self):
         self.save()
 
     def __str__(self):
-        return self.comment
+        return self.name
 
         
-class Follows(models.Model):
-    user = models.ForeignKey(User,on_delete = models.CASCADE,related_name='follow',null=True)
-    follower = models.ForeignKey(Profile,on_delete = models.CASCADE, null = True)
-
-    def save_follower(self):
-        self.save
-
-    def delete_follower(self):
-        self.save
-
-    def __int__(self):
-        return self.name

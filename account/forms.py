@@ -28,7 +28,7 @@ class UpdateProfile(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     class Meta:
         model = Profile
-        fields = ['first_name','last_name','profile_image','bio','username']
+        fields = ['first_name','last_name','profile_image','bio','project']
 
 
 class UpdateUserForm(forms.ModelForm):
@@ -37,13 +37,6 @@ class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username','email']
-
-class CommentForm(forms.ModelForm):
-    comment = forms.CharField(widget=forms.Textarea, max_length=1000)
-    
-    class Meta:
-        model = Comment
-        fields = ['comment']
 
 
 
