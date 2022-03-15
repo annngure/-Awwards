@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{%block content%}
+
+<body>
+    <div class="well">
+        <div class="row">
+                <h5 class="text-center">NEW PROFILE.</h5>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="text-center">
+                                   <label class="medium mb-1">Username:</label>
+                                    {{ form.username }} 
+                                </div>
+                                    <br>
+                                <div class="text-center">
+                                   <label class="medium mb-1">FirstName:</label>
+                                    {{ form.first_name }}   
+                                </div>
+                               
+                                    <br>
+                                <div class="text-center">
+                                    <label class="medium mb-1">LastName:</label>
+                                    {{ form.last_name }}  
+                                </div>
+                                    <br>
+                                <div class="text-center">
+                                    <label class="medium mb-1">Bio:</label> 
+                                    {{ form.bio }}
+                                </div>  
+                                
+                                    <br>
+                                <div class="text-center">
+                                    <label class="medium mb-1">Image:</label> 
+                                    {{form.profile_image}}
+                                </div>
+                                
+                            </div>
+                            
+                           
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success btn-block btn-md gradient-custom-4 text-body" style="background-color: rgb(187, 209, 202);">Save Changes</button>
+                    </div>
+                     <br>
+                    <div class="d-flex justify-content-center"> 
+                        <button type="reset" class="btn btn-success btn-block btn-md gradient-custom-4 text-body" style="background-color: rgb(187, 209, 202);">Reset</button>
+                    </div>
+                   
+                    
+                </form>
+                <p><a  href="{% url 'profile' %}" >Previous</a></p>
+
+            </div>
+       
+        </div>
+        
+            <!-- empty div -->
+        <div class="col-md-4"></div>
+    </div>
+</body>
+
+
+
+
+{% endblock %}

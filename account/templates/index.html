@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    
+    <title>Home.</title>
+    
+</head>
+
+<body>
+    <nav class="navbar" style="background-color: rgb(187, 209, 202);">       
+        <div class="container-fliud">
+            <div class="navbar-header" style="text-align: center;">
+                <a class="navbar-brand" href="{% url 'logout' %}" style="color: black;">LOGOUT</a>
+                <a class="navbar-brand" href="{% url 'login' %}" style="color: black;">LOGIN</a>
+                <a class="navbar-brand" href="{% url 'register' %}" style="color: black;">SIGNUP</a> 
+                <a class="navbar-brand" href="/admin" style="color: black;">ADMIN</a> 
+             </div>
+        </div>
+    </nav>
+
+    <p>Welcome.</p>
+
+<div class="img-fluid">
+
+</div>
+    {% if user.is_authenticated %}
+        Hi {{ user.username }}!
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+    {% endif %}   
+<div class="row">
+    {% for img in image %}
+        <div class="col-sm-2 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{img.image.url}}" alt="{{img.image.url}}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+</div>
+
+
+{% endblock %} 

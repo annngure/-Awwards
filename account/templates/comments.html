@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+ {% block content %}
+
+<div class="container">
+    <div class="col-md-3" ></div>
+    <div class="col-md-3">
+        <form style="margin-top: 100px;" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-md-1 ">
+                <div class="text-center">
+                    <label class="medium mb-1">Comments:</label>
+                     {{form.comment}}
+                </div> 
+            </div>
+            <div class="d-flex justify-content-center"> 
+                <input type="submit" class="btn btn-success btn-block btn-md gradient-custom-4 text-body" style="background-color: rgb(187, 209, 202);" value="Submit">
+                <input type="hidden" name="next" value="{{next}}">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
