@@ -1,4 +1,5 @@
 {% extends "base.html"%}
+{% load bootstrap4%}
 {% block content%}
 <head>
     <style>
@@ -7,56 +8,27 @@
 </head>
 
 <body>
-    <nav class="navbar" style="background-color: rgb(187, 209, 202);">       
-        <div class="container-fliud">
-            <div class="navbar-header" style="text-align: center;">
-                <a class="navbar-brand" href="{% url 'index' %}" style="color: black;">HOME</a> 
-                <a class="navbar-brand" href="{% url 'profile' %}" style="color: black;">Profile</a>   
-                <a class="navbar-brand" href="{% url 'logout' %}" style="color: black;">LOGOUT</a>                  
-             </div>
-        </div>
-    </nav>
-    <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-          <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-              <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                <div class="card" style="border-radius: 15px;">
-                  <div class="card-body p-5">
-                    <h2 class="text-uppercase text-center mb-5">Login.</h2>
-      
-                    <form method="post">
-                        <div class="form-outline mb-4">
-                          {% csrf_token %}  
-                            <div class="text-center">
-                                <label class="text-center">Username.</label>
-                                <br>
-                                {{form.username}}  
-                            </div>
-                      
-                        </div>
-                        <div class="form-outline mb-4">
-                            <div class="text-center">
-                                <label class="text-center">Password.</label>
-                                <br>
-                                {{form.password}}  
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" style="background-color: rgb(187, 209, 202);">Login.</button>
-                        </div>
-                        <input type="hidden" name="next" value="{{next}}">
-                        <p class="text-center text-muted mt-5 mb-0">Create a new account? <a href="/register" class="fw-bold text-body"><u>SignUp.</u></a></p>
-      
-                    </form>
-      
-                  </div>
-                </div>
-              </div>
+  <div class="text-center">
+    <h3 style="font-family:'Times New Roman', Times, serif;">AWARDS.</h3>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card border-primary mb-6" style="max-width:25rem;">
+        <div class="card-body text-center">
+          <form  method="post" style="font-family:'Times New Roman', Times, serif; " >
+            {% csrf_token %} 
+            {% bootstrap_form form%}
+            <br>
+            <div class="form-group">
+              <input type="submit" class="btn btn-danger btn-sm" value="Login">
             </div>
-          </div>
-        </div>
-    </section>
+            <input type="hidden" name="next" value="{{next}}">
+          </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+
 </body>
 
 

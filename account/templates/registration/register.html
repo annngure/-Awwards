@@ -2,7 +2,6 @@
 {%load bootstrap4%}
 
 {% block content%}
-<!-- register  -->
 
 <head>
     <style>
@@ -12,37 +11,23 @@
 <body>
 <div class="text-center">
   <h1 style="color:rgb(56, 194, 148);font-size:65px;">Awards</h1>
-</div> 
-<div class="cpl-md-4"></div>   
-  <div class="col-md-4">
-      <div class="card border-primary mb-4" style="max-width:25rem;">
-        <div class="card-header text-center">
-          
-          <h3 class="text-center" style="font-family:'Times New Roman', Times, serif;color:grey;font-size:15px;">Sign up to review and rate website projects</h3>
-        </div>
-        <div class="card-body text-primary">
-
-          <form action="/accounts/register/" method="post" style="font-family:'Times New Roman', Times, serif;">
-            {% csrf_token %} {% bootstrap_form form %}
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-            </div>
-
-            <input type="hidden" name="next" value="{{next}}">
-
-          </form>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
 </div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card border-primary" style="max-width:25rem;">
+      <div class="card-body text-center">
+        <form method="post" style="font-family:'Times New Roman', Times, serif;">
+          {% csrf_token %} {% bootstrap_form form %}
+          <div class="form-group">
+              <input type="submit" class="btn btn-danger btn-sm" value="Sign Up">
+          </div>
+          <input type="hidden" name="next" value="{{next}}">
+        </form>
+      </div>
+    </div>
+  </div>
+</div> 
 
-<div class="col-md-4"></div>
 </body>
 
 {%endblock%}
