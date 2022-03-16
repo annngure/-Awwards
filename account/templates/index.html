@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load bootstrap4%}
 {% block content %}
 <head>
     
@@ -8,37 +8,42 @@
 </head>
 
 <body>
-    <nav class="navbar" style="background-color: rgb(187, 209, 202);">       
-        <div class="container-fliud">
-            <div class="navbar-header" style="text-align: center;">
-                <a class="navbar-brand" href="{% url 'logout' %}" style="color: black;">LOGOUT</a>
-                <a class="navbar-brand" href="{% url 'login' %}" style="color: black;">LOGIN</a>
-                <a class="navbar-brand" href="{% url 'register' %}" style="color: black;">SIGNUP</a> 
-                <a class="navbar-brand" href="/admin" style="color: black;">ADMIN</a> 
-             </div>
-        </div>
-    </nav>
 
-    <p>Welcome.</p>
+<h1 class="text-center" style="font-family:'Times New Roman', Times, serif; color:aqua">Awards.</h1>
+<link href="https://fonts.googleapis.com/css?family=Charmonman|Dancing+Script|Kodchasan|Spirax|Abril+Fatface" rel="stylesheet">
 
-<div class="img-fluid">
+<div class="container">
 
-</div>
-    {% if user.is_authenticated %}
-        Hi {{ user.username }}!
-    {% else %}
-    <p>You are not logged in</p>
-    <a href="{% url 'login' %}">Log In</a>
-    {% endif %}   
-<div class="row">
-        <div class="col-sm-2 col-md-4 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <img src="{{img.image.url}}" alt="{{img.image.url}}" class="img-fluid">
-                </div>
-            </div>
-        </div>
+  <div class="jumbotron text-center mb-0" id="jumbo" style="background-color:white;">
+
+    <p class="text-center" style="font-family:'Times New Roman', Times, serif; color:black;font-size:25px;">Welcome to awards where you post projects which  are viewed and rated.</p>
+  </div>
 </div>
 
 
+<div class="jumbotron itson mb-3 ">
+    <div class="card-deck flex-wrap">
+        {% for project in projects %}
+        <div class="card border-secondary w-33"><a href="{% url 'project' project.id %}">
+            <img src="{{project.project_image.url}}" data-target="#imageModal{{project.id}}" data-toggle="modal" alt="" class="img-fluid"id="eachimage1" size="100px200"></a>
+            <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.description}}</p>
+            <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.user.username}}</p>
+            <span class="badge badge-pill badge-info" style="font-family: 'Dosis', sans-serif;">
+                <a href="{{ project.project_url}}">Visit Site</a>
+            </span>
+            <span class="badge badge-pill badge-danger" style="font-family: 'Dosis', sans-serif; text-align:center;">Like</span>
+            <span class="badge badge-pill badge-warning" style="font-family: 'Dosis', sans-serif; text-align:center;"><a href="{% url 'project' project.id %}">View Project</a></span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="container">
+  <div class="col-md-12">
+    
+  </div>
+</div>
+
+
+
+</body>
 {% endblock %} 
