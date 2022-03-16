@@ -36,29 +36,11 @@ def profileView(request):
     }
     return render(request, 'profile.html',context)
 
-# @login_required()
-# def update_profile(request):
-#     if request.method =="POST":
-#         form = UpdateProfile(request.POST ,request.FILES)
-#         if form.is_valid():
-#             request_profile.save_profile()
-#             messages.success(request,'Your profile is added sucessfully')
-#             return redirect('profile')
-#     else:
-#         form =UpdateProfile()
-#     if request.method =='POST':
-#         form = UpdateProfile(request.POST,request.FILES)
-#         if form.is_valid():
-#             new_profile.save_profile()
-#             messages.success(request,'Your profile is added sucessfully')
-#             return redirect('profile')
-#     else:
-#         form = UpdateProfile()
-#     context={
-#         "form":form
-#     }
+@login_required()
+def update_profile(request):
+    
 
-#     return render(request, 'update-profile.html',context)
+    return render(request, 'project.html')
 
 def comment(request):
     # post = get_object_or_404(image,id=id)	
