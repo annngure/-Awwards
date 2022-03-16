@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
+
 {%load bootstrap4%}
+
 {% block content %}
 
-
-<body>
-
-<h2><a href="{% url 'project' %}">{{ review.project.user }}</a></h2>
+{% block title %}
+<h2><a href="{% url 'project'  %}">{{ review.project.user }}</a></h2>
+{% endblock %}
 
 
 <h4>Rated {{ review.content_rating }} of 10 by
-    <a href="{% url 'profile' %}" >{{ review.user }}</a></h4>
+    <a href="{% url 'profile'  %}" >{{ review.user }}</a></h4>
 
 
 <h4>Rated {{ review.design_rating }} of 10 by
-    <a href="{% url 'profile'%}" >{{ review.user }}</a></h4>
+    <a href="{% url 'profile'  %}" >{{ review.user }}</a></h4>
 
 <h4>Rated {{ review.usability_rating }} of 10 by
-    <a href="{% url 'profile'%}" >{{ review.user }}</a></h4>
+    <a href="{% url 'profile' %}" >{{ review.user }}</a></h4>
 <p>{{ review.comment }}</p>
 {% endblock %}
-
-</body>

@@ -45,11 +45,10 @@ def project(request):
 def review(request):
   
     return render(request,'review.html')
-
+ 
 def list(request):
-    
 
-    return render(request, 'project.html')    
+    return render(request,'list.html')
 
 def registerView(request):
     if request.method=="POST":

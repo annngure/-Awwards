@@ -5,24 +5,24 @@
 {% block content %}
 
 <body>
-<h2>Latest reviews</h2>
+<h2 class="text-center">Latest reviews</h2>
 
 {% if latest_review_list %}
 <div>
     {% for review in latest_review_list %}
     <div>
-        <h4><a href="{% url 'review_detail' review.id %}">
+        <h4><a href="{% url 'review' %}">
         {{ review.wine.name }}
         </a></h4>
-        <h6> Design Rating is {{ review.design_rating }} of 5 by {{ review.user }}</h6>
-        <h6> Usability Rating is {{ review.usability_rating }} of 5 by {{ review.user }}</h6>
-        <h6> Content Rating is {{ review.content_rating }} of 5 by {{ review.user }}</h6>
+        <h6> Design Rating is {{ review.design_rating }} {{ review.user }}</h6>
+        <h6> Usability Rating is {{ review.usability_rating }} {{ review.user }}</h6>
+        <h6> Content Rating is {{ review.content_rating }} {{ review.user }}</h6>
         <p>{{ review.comment }}</p>
     </div>
     {% endfor %}
 </div>
 {% else %}
-<p>No reviews are available.</p>
+<p class="text-center">No reviews are available.</p>
 {% endif %}
 
 

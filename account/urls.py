@@ -13,7 +13,7 @@ urlpatterns=[
     path('logout/',LogoutView.as_view(next_page ="index"), name="logout"),
     path('project',views.project,name ="project"),
     path('review/',views.review, name ='review'),
-    path('list/'),views.list,name ='list')
+    path('list/',views.list, name = 'list')
 
 ]
 if settings.DEBUG:
