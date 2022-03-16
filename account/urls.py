@@ -11,8 +11,9 @@ urlpatterns=[
     path('login/',LoginView.as_view(), name="login"),
     path('register/',views.registerView,name="register"),
     path('logout/',LogoutView.as_view(next_page ="index"), name="logout"),
-    path('project',views.update_profile,name ="project"),
-    path('comment/',views.comment, name ='comment')
+    path('project',views.project,name ="project"),
+    path('review/',views.review, name ='review'),
+    path('list/'),views.list,name ='list')
 
 ]
 if settings.DEBUG:

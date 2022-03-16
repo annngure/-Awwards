@@ -37,31 +37,19 @@ def profileView(request):
     return render(request, 'profile.html',context)
 
 @login_required()
-def update_profile(request):
+def project(request):
     
 
     return render(request, 'project.html')
 
-def comment(request):
-    # post = get_object_or_404(image,id=id)	
-    # current_user = request.user
-    # print(post)
+def review(request):
+  
+    return render(request,'review.html')
 
-    if request.method=='POST':
-        form =CommentForm(request.POST)
+def list(request):
+    
 
-        if form.is_valid():
-            comment = form.save(commit=False)
-            # comment.user = current_user
-            # # comment.image = post
-            comment.save()
-            return redirect('index')
-    else:
-        form =CommentForm()
-        context={
-            "form":form
-        }
-    return render(request,'comments.html',context)
+    return render(request, 'project.html')    
 
 def registerView(request):
     if request.method=="POST":
