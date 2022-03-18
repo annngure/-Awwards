@@ -14,8 +14,8 @@ urlpatterns=[
     path('project',views.project,name ="project"),
     path('review/',views.review, name ='review'),
     path('list/',views.list, name = 'list'),
-    path('view/',views.view, name ='view')
-
+    path('view/',views.view, name ='view'),
+  
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

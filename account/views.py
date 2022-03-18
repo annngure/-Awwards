@@ -5,17 +5,20 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.contrib import auth,messages
 from .models import *
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import *
+
+
 
 # Create your views here.
 
 
 
 def index(request):
-    image=Image.objects.all()
-    context={
-        "image":image
-    }
-    return render(request,'index.html',context)
+   
+    return render(request,'index.html')
 
 @login_required()
 def profileView(request):
@@ -38,17 +41,25 @@ def profileView(request):
 
 @login_required()
 def project(request):
-    
+    project_list = Project.objects.order_by('title')
+    context = {'project':project}
 
-    return render(request, 'project.html')
+    return render(request, 'project.html',context)
 
 def review(request):
-  
-    return render(request,'review.html')
+    
+    review = get_object_or_404(Review, pk=review_id)
+    return render(request,'review.html',context)
  
 def list(request):
+    latest_review_list = Review.objects.all()
+    context = {'list':list}
+    return render(request,'list.html',context)
 
-    return render(request,'list.html')
+def user(request):
+
+    return render(request,'user.html')
+
 
 def view(request):
     try:
@@ -79,13 +90,14 @@ def view(request):
 
     else:
         form = ReviewForm()
+        context={
+           "project": project,
+        'form':form,
+            'comments':comments,
+            'review':review
+       }
 
-        # return HttpResponseRedirect(reverse('image', args=(image.id,)))
-
-    return render(request, 'image.html', {"project": project,
-                                          'form':form,
-                                          'comments':comments,
-                                          'latest_review_list':latest_review_list})
+    return render(request, 'image.html', context)
 
     return render(request,'view.html')
 
@@ -125,3 +137,17 @@ def loginPage(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
+# serializer views
+   
+class ProfileViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAdminOrReadOnly,)
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAdminOrReadOnly,)
+    queryset = Post.objects.all()
+    serializer_class = ProjectSerializer
