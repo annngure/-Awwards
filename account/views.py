@@ -50,6 +50,45 @@ def list(request):
 
     return render(request,'list.html')
 
+def view(request):
+    try:
+        project = Project.objects.get(pk = id)
+
+    except DoesNotExist:
+        raise Http404()
+
+    current_user = request.user
+    comments = Review.get_comment(Review, id)
+    latest_review_list=Review.objects.all()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            design_rating = form.cleaned_data['design_rating']
+            content_rating = form.cleaned_data['content_rating']
+            usability_rating = form.cleaned_data['usability_rating']
+            comment = form.cleaned_data['comment']
+            review = Review()
+            review.project = project
+            review.user = current_user
+            review.comment = comment
+            review.design_rating = design_rating
+            review.content_rating = content_rating
+            review.usability_rating = usability_rating
+            review.save()
+
+    else:
+        form = ReviewForm()
+
+        # return HttpResponseRedirect(reverse('image', args=(image.id,)))
+
+    return render(request, 'image.html', {"project": project,
+                                          'form':form,
+                                          'comments':comments,
+                                          'latest_review_list':latest_review_list})
+
+    return render(request,'view.html')
+
 def registerView(request):
     if request.method=="POST":
         form = NewUserForm(request.POST)

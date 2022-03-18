@@ -80,4 +80,36 @@ class Image(models.Model):
     def __str__(self):
         return self.name
 
-        
+
+
+class Review(models.Model):
+    rating = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+
+    )
+    project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.CASCADE, related_name="reviews")
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='review')
+    image = models.ForeignKey(Image, on_delete=models.CASCADE,null=True, blank=True)
+    comment = models.TextField()
+    design = models.IntegerField(choices=rating, default=0)
+    usability = models.IntegerField(choices=rating, default=0)
+    content = models.IntegerField(choices=rating, default=0)
+
+    def save_comment(self):
+        self.save()
+
+    def get_comment(self, id):
+        comments = Review.objects.filter(image_id =id)
+        return comments
+
+    def __str__(self):
+        return self.comment      

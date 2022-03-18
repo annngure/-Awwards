@@ -26,5 +26,8 @@ class UpdateProfileForm(forms.ModelForm):
         fields = ("first_name","last_name","profile_image","bio","project")
 
 
-
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['design', 'usability', 'content']
        

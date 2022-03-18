@@ -1,0 +1,57 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% load bootstrap4 %} 
+
+{% block content %}
+
+<body>
+  <div class="container">
+      <h1 class="text-center" style="font-family:'Times New Roman', Times, serif;">PROJECTS</h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="card mb-3" style="width:40rem;;">
+      <img class="card-img-top" src="{{project.project_image.url}}" alt="Card image cap" class="img-fluid" size="100px200">
+        <div class="card-body">
+          <h5 class="card-title" style="font-family:'Times New Roman', Times, serif;"><strong>Project Name:</strong>
+          <br>
+            {{project.title}}
+          </h5>
+          <p class="card-text" style="font-family:'Times New Roman', Times, serif;"><strong>Description Of Project:</strong>
+            <br>
+            {{project.description}}</p>
+        </div>
+        <div class="card border-secondary">
+          <div class="card-header">
+            <h5 style="font-family:'Times New Roman', Times, serif"> Comments</h5>
+          </div>
+        
+          {% for review in latest_review_list %}
+      
+          <p style="font-family:'Times New Roman', Times, serif">Comment by {{ review.user }}: {{ review.comment }}</p>
+        </div>
+      {% endfor %}
+      <h1 style="font-family:'Times New Roman', Times, serif;">AVERAGE OF REVIEWS</h1>
+      <h5 style="font-family:'Times New Roman', Times, serif;">{{ project.reviews.count }} reviews ({{ project.average_design | floatformat }} average rating of design)</h5>
+      <h5 style="font-family:'Times New Roman', Times, serif;">{{ project.reviews.count }} reviews ({{ project.average_content | floatformat }} average rating of content)</h5>
+      <h5 style="font-family:'Times New Roman', Times, serif;">{{ project.reviews.count }} reviews ({{ project.average_usability | floatformat }} average rating of usability)</h5>
+      
+      <h3 style="font-family:'Times New Roman', Times, serif;">Add your comment</h3>
+        <br>
+        <form action=""  method="post" style="font-family:'Times New Roman', Times, serif;">
+            {%csrf_token%} 
+            {% bootstrap_form form%}
+            <input type="submit" class="btn btn-danger" value="Post">
+        </form>
+        <br>
+      
+    </div>
+  </div>
+      
+      
+      
+</body>
+
+{% endblock %}
