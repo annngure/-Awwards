@@ -5,22 +5,22 @@
 {% block content %}
 
 <body>
-<h2 class="text-center">{{ project.title }}</h2>
-<h5 class="text-center">{{ review.rating }} reviews {{ project.design}} average rating of design</h5>
-<h5 class="text-center">{{  review.rating }} reviews {{ project.content}} average rating of content</h5>
-<h5 class="text-center">{{ review.rating}} reviews {{ project.usability }} average rating of usability</h5>
+<h2 class="text-center" style="font-family:'Times New Roman', Times, serif;">{{ project.title }}</h2>
+<h5 class="text-center" style="font-family:'Times New Roman', Times, serif;">{{ review.rating }} reviews {{ project.design}} average rating of design</h5>
+<h5 class="text-center" style="font-family:'Times New Roman', Times, serif;">{{ review.rating }} reviews {{ project.content}} average rating of content</h5>
+<h5 class="text-center" style="font-family:'Times New Roman', Times, serif;">{{ review.rating}}  reviews {{ project.usability }} average rating of usability</h5>
 <br>
-<h3 class="text-center">Recent reviews</h3>
+<h3 class="text-center" style="font-family:'Times New Roman', Times, serif;">Recent reviews</h3>
 
-{% if project.review %}
+{% if review %}
 <div class="row">
     {% for review in review %}
 
     <div class="col-xs-6 col-lg-4">
-        <em>{{ review.comment }}</em>
-        <h6>Design Rated {{ review.design}} of 10 by {{ review.user }}</h6>
-        <h6>Content Rated {{ review.content}} of 10 by {{ review.user }}</h6>
-        <h6>Usability Rated {{ review.usability }} of 10 by {{ review.user }}</h6>
+        <h1>{{ review.comment }}</h1>
+        <h6 style="font-family:'Times New Roman', Times, serif;">Design Rated {{ review.design}} of 10 by {{ review.user }}</h6>
+        <h6 style="font-family:'Times New Roman', Times, serif;">Content Rated {{ review.content}} of 10 by {{ review.user }}</h6>
+        <h6 style="font-family:'Times New Roman', Times, serif;">Usability Rated {{ review.usability }} of 10 by {{ review.user }}</h6>
 
     </div>
     {% endfor %}
