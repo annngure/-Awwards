@@ -14,32 +14,29 @@
         <a href="{%url 'profile'%}">Edit Profile</a>
         </li>
 
-        <li style="font-family:'Times New Roman', Times, serif;">
-        <a href="{% url 'individual_profile_page' user.id %}">My Profile</a>
-        </li>
+        
         <li style="font-family:'Times New Roman', Times, serif;">
             <a href="{%url 'new_project'%}">Submit Your Project</a>
         </li>
         <li style="font-family:'Times New Roman', Times, serif;">
-        <a href="/logout">Logout</a>
+        <a href="{%url 'logout'%}">Logout</a>
         </li>
 
       {% else %}
         <li style="font-family:'Times New Roman', Times, serif;">
-        <a class='btn btn-default' href="/registration/login">Login</a>
+        <a class='btn btn-default' href="{%url 'login'%}">Login</a>
         </li>
 
         <li style="font-family: 'Dosis', sans-serif;">
-        <a class='btn btn-default' href="/registration/register">Register</a>
+        <a class='btn btn-default' href="{%url 'register'%}">Register</a>
         </li>
 
 {% endif %}
     </div>
 
-    <!-- Adding a search form  -->
     <div class="col-sm-4 col-md-4 navbar-right">
 
-      <form class="navbar-form" role="search" action="{% url 'search_project' %}">
+      <form class="navbar-form" role="search" action="{% url 'search' %}">
 
         <div class="input-group">
           <input type="text" style="font-family:'Times New Roman', Times, serif;" class="form-control mr-sm-4" placeholder="Search Project" name="project">

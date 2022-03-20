@@ -60,7 +60,7 @@ def user(request):
     return render(request,'user.html')
 
 
-def view(request):
+def view(request,id):
     try:
         project = Project.objects.get(pk = id)
 
@@ -74,25 +74,25 @@ def view(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            design_rating = form.cleaned_data['design_rating']
-            content_rating = form.cleaned_data['content_rating']
-            usability_rating = form.cleaned_data['usability_rating']
+            design_rating = form.cleaned_data['design']
+            content_rating = form.cleaned_data['content']
+            usability_rating = form.cleaned_data['usability']
             comment = form.cleaned_data['comment']
             review = Review()
             review.project = project
             review.user = current_user
             review.comment = comment
-            review.design_rating = design_rating
-            review.content_rating = content_rating
-            review.usability_rating = usability_rating
+            review.design= design
+            review.content= content
+            review.usability = usability
             review.save()
 
     else:
         form = ReviewForm()
         context={
            "project": project,
-        'form':form,
-            'comments':comments,
+            'form':form,
+            'comment':comment,
             'review':review
        }
 
@@ -163,3 +163,21 @@ def user_list(request):
     user_list = User.objects.all()
     context = {'user_list': user_list}
     return render(request, 'user_list.html', context)
+
+
+def new_project(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.user = current_user
+            project.save()
+        return redirect('index')
+
+    else:
+        form = NewProjectForm()
+    context={
+           "form": form 
+           }
+    return render(request, 'new_project.html',context )

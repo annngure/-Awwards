@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
 {% load bootstrap4%}
 {% block content %}
 <head>
@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+  {% include 'navbar.html' %} 
 <h1 class="text-center" style="font-family:'Times New Roman', Times, serif; color:aqua">Awards.</h1>
 <link href="https://fonts.googleapis.com/css?family=Charmonman|Dancing+Script|Kodchasan|Spirax|Abril+Fatface" rel="stylesheet">
 
@@ -25,7 +25,7 @@
     <div class="card-deck flex-wrap">
         {% for project in projects %}
         <div class="card border-secondary w-33"><a href="{% url 'project' project.id %}">
-            <img src="{{project.project_image.url}}" data-target="#imageModal{{project.id}}" data-toggle="modal" alt="" class="img-fluid"id="eachimage1" size="100px200"></a>
+            <img src="{{project.project_image.}}" data-toggle="modal" alt="" class="img-fluid"id="eachimage1"></a>
             <p style="font-family:'Times New Roman', Times, serif;"> {{ project.description}}</p>
             <p style="font-family:'Times New Roman', Times, serif;"> {{ project.user.username}}</p>
             <span class="badge badge-pill badge-info" style="font-family:'Times New Roman', Times, serif;">

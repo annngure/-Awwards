@@ -16,7 +16,8 @@ urlpatterns=[
     path('list/',views.list, name = 'list'),
     path('view/',views.view, name ='view'),
     path('search/',views.search_project,name ='search'),
-    path('user/',views.user_list, name ='user')
+    path('user/',views.user_list, name ='user'),
+    path('new_project/',views.new_project, name='new_project')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
