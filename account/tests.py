@@ -2,64 +2,78 @@ from django.test import TestCase
 from . models import *
 # Create your tests here.
 
+class LocationTestClass(TestCase):
 
-class ImagesTestClass(TestCase):
-  '''
-  Class where we write our image models tests
-  '''
+    #Set up method the test for location 
   def setUp(self):
-    '''
-    function that runs before others
-    '''
-    self.test_user = User(username = 'women')
-    self.test_user.save()
-    self.image = Image(image = 'women.jpeg',name = 'women',caption = 'women',user = self.test_user)
-    self.comments = Comment(comment = 'confidence',image = self.image,user = self.test_user)
+    self.test_location = Location(name = 'Kericho')
+    self.test_location.save()
+
+    #Testing instance
 
   def test_instance(self):
-    self.assertTrue(isinstance(self.image,Image))
+    self.assertTrue(isinstance(self.test_location, Location))
 
+    #Testing Save method
 
-  def test_save_image(self):
-    self.image.save_image()
-    image = Image.objects.all()
-    self.assertTrue(len(image)>0)
+  def test_save_method(self):
+    locations = Location.objects.all()
+    self.assertTrue(len(locations)>0)
 
+    # Tear down method
+  def tearDown(self):
+    Location.objects.all().delete()
 
-  def test_delete_image(self):
-    self.image2 = Image(image = 'celeb1.jpeg',name = 'celebrity',caption = 'trend',user = self.test_user)
-    self.image2.save_image()
-    self.image.save_image()
-    self.image.delete_post()
-    images = Image.objects.all()
-    self.assertEqual(len(images),1)
+        # Testing delete method
 
-
-  def test_search(self):
-    self.image.save_image()
-    self.image2 = Image(image = 'celeb1.jpeg',name = 'celeb',caption = '',user = self.test_user)
-    self.image2.save_image()
-    search_term = "e"
-    search1 = Image.search_images(search_term)
-    search2 = Image.objects.filter(name__icontains = search_term)
-    self.assertEqual(len(search2),len(search1))
-
-
-  def test_display_images(self):
-    self.image.save_image()
-    self.image2= Image(image = 'celeb1.jpeg',name = 'celeb',caption = '',user = self.test_user)
-    self.image2.save_image()
-    dt = Image.display_images()
-    self.assertEqual(len(dt),2)
+  def test_delete_location(self):
+    self.test_location.delete()
+    self.assertEqual(len(Location.objects.all()), 0)
 
 
 
+class Review(TestCase):
+  def setUp(self):
+    self.ann = User.objects.create(username="try")
+    self.image = Image.objects.create(image='image1',user=self.ann)
+    self.comment = Review.objects.create(comment = 'goodbackground')
+    self.test_review = Review.objects.create(user=self.ann,image=self.image ,comment='goodbackground')
+    self.test_review.save()
 
+    #Testing instance
 
-class CommentTestClass(TestCase):
+  def test_instance(self):
+    self.assertTrue(isinstance(self.test_reviews, Review))
 
-    def setUp(self):
+    #Testing Save method
+  def test_save_method(self):
+    reviews = Review.objects.all()
+    self.assertTrue(len(reviews)>0)
+
+  def test_save_review(self):
+    self.assertEqual(len(Review.objects.all()), 1)
+
+    # Tear down method
+  def tearDown(self):
+    Review.objects.all().delete()
+
+        # Testing delete method
+
+  def test_delete_review(self):
+    self.test_review.delete()
+    self.assertEqual(len(Review.objects.all()), 0)
         
-        self.new_comment = Comment(comment= "comment")
-        self.new_comment.save()
 
+class ProfileTest(TestCase):
+    def setUp(self):
+        self.user = User(username='mary',email="mary@gmail.com", password='password')
+        self.user.save()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.user, User))
+
+    def test_save_user(self):
+        self.user.save()
+
+    def test_delete_user(self):
+        self.user.delete()
