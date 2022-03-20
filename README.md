@@ -2,9 +2,9 @@ Developer
 Ngure Ann
 
 Description
-creating a clone of the website for the popular photo app Instagram
+project where one can post or view other projects .
 
-L
+
 
 Technologies used
 - Python 3
@@ -12,8 +12,10 @@ Technologies used
 - Django
 - Postgresql
 -SQLAlchemy
-get project from github .
-https://github.com/annngure/instagram.git
+-serializer
+
+Get project from github .
+https://github.com/annngure/-Awwards.git
 
 Create and activate the virtual environment
 python3 -m virtualenv virtual
@@ -26,7 +28,7 @@ In a new terminal, open the postgresql shell with psql.
 
 CREATE DATABASE tutorial;
 Make and run migrations
-python3 run.py make migrations && python3.8 manage.py migrate
+python3 manage.py  make migrations && python3.8 manage.py migrate
 Run the app
 
 
