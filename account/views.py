@@ -151,3 +151,11 @@ class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+# search for projects
+def search_project(request):
+    if request.method == 'GET':
+        title = request.GET.get("title")
+        project = Project.objects.filter(title__icontains=title).all()
+
+    return render(request, 'search.html', {'project':project})
