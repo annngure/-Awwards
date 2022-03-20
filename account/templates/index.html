@@ -26,13 +26,13 @@
         {% for project in projects %}
         <div class="card border-secondary w-33"><a href="{% url 'project' project.id %}">
             <img src="{{project.project_image.url}}" data-target="#imageModal{{project.id}}" data-toggle="modal" alt="" class="img-fluid"id="eachimage1" size="100px200"></a>
-            <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.description}}</p>
-            <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.user.username}}</p>
-            <span class="badge badge-pill badge-info" style="font-family: 'Dosis', sans-serif;">
+            <p style="font-family:'Times New Roman', Times, serif;"> {{ project.description}}</p>
+            <p style="font-family:'Times New Roman', Times, serif;"> {{ project.user.username}}</p>
+            <span class="badge badge-pill badge-info" style="font-family:'Times New Roman', Times, serif;">
                 <a href="{{ project.project_url}}">Visit Site</a>
             </span>
-            <span class="badge badge-pill badge-danger" style="font-family: 'Dosis', sans-serif; text-align:center;">Like</span>
-            <span class="badge badge-pill badge-warning" style="font-family: 'Dosis', sans-serif; text-align:center;"><a href="{% url 'project' project.id %}">View Project</a></span>
+            <span class="badge badge-pill badge-danger" style="font-family:'Times New Roman', Times, serif;">Like</span>
+            <span class="badge badge-pill badge-warning" style="font-family:'Times New Roman', Times, serif;"><a href="{% url 'project' project.id %}">View Project</a></span>
         </div>
         {% endfor %}
     </div>
