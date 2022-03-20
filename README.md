@@ -28,7 +28,7 @@ In a new terminal, open the postgresql shell with psql.
 
 CREATE DATABASE tutorial;
 Make and run migrations
-python3 manage.py  make migrations && python3.8 manage.py migrate
+python3 manage.pymake migrations && python3.8 manage.py migrate
 Run the app
 
 
