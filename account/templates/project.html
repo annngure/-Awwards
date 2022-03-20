@@ -5,22 +5,22 @@
 {% block content %}
 
 <body>
-<h2>{{ project.title }}</h2>
-<h5>{{ project.review_set.count }} reviews ({{ project.design_rating | floatformat }} average rating of design)</h5>
-<h5>{{ project.review_set.count }} reviews ({{ project.content_rating | floatformat }} average rating of content)</h5>
-<h5>{{ project.review_set.count }} reviews ({{ project.usability_rating | floatformat }} average rating of usability)</h5>
+<h2 class="text-center">{{ project.title }}</h2>
+<h5 class="text-center">{{ review.rating }} reviews {{ project.design}} average rating of design</h5>
+<h5 class="text-center">{{  review.rating }} reviews {{ project.content}} average rating of content</h5>
+<h5 class="text-center">{{ review.rating}} reviews {{ project.usability }} average rating of usability</h5>
+<br>
+<h3 class="text-center">Recent reviews</h3>
 
-<h3>Recent reviews</h3>
-
-{% if project.review_set.all %}
+{% if project.review %}
 <div class="row">
-    {% for review in project.review_set.all %}
+    {% for review in review %}
 
     <div class="col-xs-6 col-lg-4">
         <em>{{ review.comment }}</em>
-        <h6>Design Rated {{ review.design_rating}} of 10 by {{ review.user }}</h6>
-        <h6>Content Rated {{ review.content_rating }} of 10 by {{ review.user }}</h6>
-        <h6>Usability Rated {{ review.usability_rating }} of 10 by {{ review.user }}</h6>
+        <h6>Design Rated {{ review.design}} of 10 by {{ review.user }}</h6>
+        <h6>Content Rated {{ review.content}} of 10 by {{ review.user }}</h6>
+        <h6>Usability Rated {{ review.usability }} of 10 by {{ review.user }}</h6>
 
     </div>
     {% endfor %}

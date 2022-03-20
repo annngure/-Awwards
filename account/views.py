@@ -48,8 +48,7 @@ def project(request):
 
 def review(request):
     
-    review = get_object_or_404(Review, pk=review_id)
-    return render(request,'review.html',context)
+    return render(request,'review.html')
  
 def list(request):
     latest_review_list = Review.objects.all()
