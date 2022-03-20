@@ -9,8 +9,8 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import *
-
-
+from rest_framework import viewsets
+from .permission import IsAdminOrReadOnly
 
 # Create your views here.
 
@@ -149,5 +149,5 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
-    queryset = Post.objects.all()
+    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
