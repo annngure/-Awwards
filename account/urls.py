@@ -15,8 +15,8 @@ urlpatterns=[
     path('review/',views.review, name ='review'),
     path('list/',views.list, name = 'list'),
     path('view/',views.view, name ='view'),
-    path('search/',views.search_project,name ='search')
-  
+    path('search/',views.search_project,name ='search'),
+    path('user/',views.user_list, name ='user')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

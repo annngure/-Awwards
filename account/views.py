@@ -156,6 +156,11 @@ class ProjectViewSet(viewsets.ModelViewSet):
 def search_project(request):
     if request.method == 'GET':
         title = request.GET.get("title")
-        project = Project.objects.filter(title__icontains=title).all()
+        # posts = Post.objects.filter(title__icontains=title).all()
 
-    return render(request, 'search.html', {'project':project})
+    return render(request, 'search.html')
+
+def user_list(request):
+    user_list = User.objects.all()
+    context = {'user_list': user_list}
+    return render(request, 'user_list.html', context)
