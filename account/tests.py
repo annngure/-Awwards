@@ -57,26 +57,25 @@ class Review(TestCase):
   def tearDown(self):
     Review.objects.all().delete()
 
-        # Testing delete method
-
+     # Testing delete method
   def test_delete_review(self):
     self.test_review.delete()
     self.assertEqual(len(Review.objects.all()), 0)
         
 
 class ProfileTest(TestCase):
-    def setUp(self):
-        self.user = User(username='mary',email="mary@gmail.com", password='password')
-        self.user.save()
+  def setUp(self):
+    self.user = User(username='mary',email="mary@gmail.com", password='password')
+    self.user.save()
 
-    def test_instance(self):
-        self.assertTrue(isinstance(self.user, User))
+  def test_instance(self):
+    self.assertTrue(isinstance(self.user, User))
 
-    def test_save_user(self):
-        self.user.save()
+  def test_save_user(self):
+    self.user.save()
 
-    def test_delete_user(self):
-        self.user.delete()
+  def test_delete_user(self):
+    self.user.delete()
 
 class ProjectTest(TestCase):
   def test_instance(self):
